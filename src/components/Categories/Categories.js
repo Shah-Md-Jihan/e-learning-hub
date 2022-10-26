@@ -1,10 +1,11 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import './Category.css'
+import Button from 'react-bootstrap/Button';
 
 const Categories = () => {
     const categories = useLoaderData();
@@ -18,9 +19,12 @@ const Categories = () => {
                             <Card.Img variant="top" className='category_img p-5 w-75 mx-auto' src={category.img} />
                             <Card.Body>
                                 <Card.Title className='fs-2'>{category.title}</Card.Title>
-                                <Card.Text className='fs-4 pb-5'>
+                                <Card.Text className='fs-4 pb-2'>
                                     {category.description}
                                 </Card.Text>
+                                <Link to={`/categories/${category._id}`}>
+                                    <Button size="lg" variant="outline-dark" className='mb-3'>Proceed to Checkout</Button>
+                                </Link>
                             </Card.Body>
                         </Card>
                     </Col>
