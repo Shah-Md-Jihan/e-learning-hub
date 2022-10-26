@@ -14,6 +14,7 @@ const Register = () => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
+        const image = form.image.value;
         const email = form.email.value;
         const password = form.password.value;
 
@@ -21,15 +22,16 @@ const Register = () => {
         providerRegister(email, password)
             .then((userData) => {
                 const user = userData.user;
-                handleUpdateProfile(name);
+                handleUpdateProfile(name, image);
             })
             .catch(error => console.error(error))
         form.reset();
     }
 
-    const handleUpdateProfile = (name) => {
+    const handleUpdateProfile = (name, image) => {
         const profile = {
-            displayName: name
+            displayName: name,
+            photoURL: image
         }
         providerUpdateProfile(profile);
 
@@ -45,6 +47,11 @@ const Register = () => {
                             <Form.Group className="mb-3" controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control name="name" type="text" placeholder="Enter name" required />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicImage">
+                                <Form.Label>Image URL</Form.Label>
+                                <Form.Control name="image" type="text" placeholder="Enter name" required />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail">
