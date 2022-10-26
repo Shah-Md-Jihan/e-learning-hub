@@ -4,11 +4,14 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import { AuthContex } from '../../context/AuthProvider';
+import { useState } from 'react';
 
 
 const Register = () => {
 
     const { providerRegister, providerUpdateProfile } = useContext(AuthContex);
+    const [error, setError] = useState('');
+    const [terms, setTerms] = useState(false);
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -23,8 +26,9 @@ const Register = () => {
             .then((userData) => {
                 const user = userData.user;
                 handleUpdateProfile(name, image);
+                setError('');
             })
-            .catch(error => console.error(error))
+            .catch(error => setError(error.message))
         form.reset();
     }
 
@@ -33,8 +37,16 @@ const Register = () => {
             displayName: name,
             photoURL: image
         }
-        providerUpdateProfile(profile);
+        providerUpdateProfile(profile)
+            .then(() => {
+                setError('')
+            })
+            .catch(error => setError(error.message))
 
+    }
+
+    const handleTerms = (e) => {
+        setTerms(e.target.checked);
     }
 
     return (
@@ -43,6 +55,9 @@ const Register = () => {
                 <Card>
                     <Card.Body>
                         <h4 className='text-dark fs-5 text-center py-3'>SIGN UP</h4>
+                        {
+                            error && <p className='text-danger'>{error}</p>
+                        }
                         <Form onSubmit={handleRegister}>
                             <Form.Group className="mb-3" controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
@@ -64,9 +79,16 @@ const Register = () => {
                                 <Form.Control name="password" type="password" placeholder="Password" required />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                <Form.Check type="checkbox" label="Check me out" />
+                                <Form.Check
+                                    type="checkbox"
+                                    onClick={handleTerms}
+                                    label={<>Accept our <Link to="/terms">terms & conditions</Link></>} />
                             </Form.Group>
-                            <Button variant="success" className='w-100 my-3' type="submit">
+                            <Button
+                                variant="success"
+                                className='w-100 my-3'
+                                disabled={!terms}
+                                type="submit">
                                 Sign Up
                             </Button>
                         </Form>

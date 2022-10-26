@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContex } from '../../context/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
     const { providerGoogleLogin, providerEmailLogin } = useContext(AuthContex);
+    const [error, setError] = useState('');
     const googleProvider = new GoogleAuthProvider();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location?.state?.from?.pathname || '/';
+
+
+
     const handleGoogleLogin = () => {
         providerGoogleLogin(googleProvider)
             .then(result => {
@@ -28,8 +36,10 @@ const Login = () => {
         providerEmailLogin(email, password)
             .then(loginUserInfo => {
                 const loggedUser = loginUserInfo.user;
+                navigate(from, { replace: true });
+                setError('');
             })
-            .catch(error => console.error(error))
+            .catch(error => setError(error.message))
         form.reset();
     }
     return (
@@ -37,6 +47,9 @@ const Login = () => {
             <Card>
                 <Card.Body>
                     <h4 className='text-dark fs-5 text-center py-3'>LOGIN</h4>
+                    {
+                        error && <p className='text-danger'>{error}</p>
+                    }
                     <Form onSubmit={handleEmailLogin}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
