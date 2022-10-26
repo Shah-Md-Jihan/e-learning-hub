@@ -8,7 +8,7 @@ import { AuthContex } from '../../context/AuthProvider';
 
 const Register = () => {
 
-    const { providerRegister } = useContext(AuthContex);
+    const { providerRegister, providerUpdateProfile } = useContext(AuthContex);
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -21,10 +21,20 @@ const Register = () => {
         providerRegister(email, password)
             .then((userData) => {
                 const user = userData.user;
+                handleUpdateProfile(name);
             })
             .catch(error => console.error(error))
         form.reset();
     }
+
+    const handleUpdateProfile = (name) => {
+        const profile = {
+            displayName: name
+        }
+        providerUpdateProfile(profile);
+
+    }
+
     return (
         <div>
             <div className='w-25 mx-auto my-5'>
