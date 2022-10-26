@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
+import Blog from "../components/Blog/Blog";
 import Categories from "../components/Categories/Categories";
 import CourseClass from "../components/CourseClass/CourseClass";
+import Faq from "../components/Faq/Faq";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import TermsConditions from "../components/Others/TermsConditions";
@@ -22,6 +24,14 @@ export const routes = createBrowserRouter([
                 path: '/categories',
                 element: <Categories></Categories>,
                 loader: () => fetch('http://127.0.0.1:5000/categories')
+            },
+            {
+                path: '/faq',
+                element: <Faq></Faq>
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
             },
             {
                 path: '/login',
