@@ -9,7 +9,7 @@ import { AuthContex } from '../../context/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-    const { providerGoogleLogin } = useContext(AuthContex);
+    const { providerGoogleLogin, providerEmailLogin } = useContext(AuthContex);
     const googleProvider = new GoogleAuthProvider();
     const handleGoogleLogin = () => {
         providerGoogleLogin(googleProvider)
@@ -18,20 +18,34 @@ const Login = () => {
             })
             .catch(e => console.error(e));
     }
+
+    const handleEmailLogin = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        providerEmailLogin(email, password)
+            .then(loginUserInfo => {
+                const loggedUser = loginUserInfo.user;
+            })
+            .catch(error => console.error(error))
+        form.reset();
+    }
     return (
         <div className='w-25 mx-auto my-5'>
             <Card>
                 <Card.Body>
                     <h4 className='text-dark fs-5 text-center py-3'>LOGIN</h4>
-                    <Form>
+                    <Form onSubmit={handleEmailLogin}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control name="email" type="email" placeholder="Enter email" required />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control name="password" type="password" placeholder="Password" required />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Check me out" />
