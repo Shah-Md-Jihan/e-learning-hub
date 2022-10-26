@@ -37,11 +37,11 @@ const Header = () => {
                         <Nav>
                             {
                                 user?.photoURL ?
-                                    <Link to="/" className='text-decoration-none text-white fs-5 me-3'>
+                                    <Link to="/" className='text-decoration-none text-white fs-5 me-3' data-bs-toggle="tooltip" data-bs-placement="bottom" title={user?.displayName}>
                                         <Image src={user?.photoURL} style={{ height: '40px' }} roundedCircle></Image>
                                     </Link>
                                     :
-                                    <Link to="/" className='text-decoration-none text-white fs-5 me-3'>
+                                    <Link to="/" className='text-decoration-none text-white fs-5 me-3' data-bs-toggle="tooltip" data-bs-placement="bottom" title={user?.displayName}>
                                         <FaUser></FaUser>
                                     </Link>
 
