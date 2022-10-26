@@ -10,7 +10,7 @@ import { FaUser } from 'react-icons/fa';
 
 const Header = () => {
     const { user, providerLogOut } = useContext(AuthContex);
-    console.log(user?.photoURL);
+
     const handleLogOut = () => {
         providerLogOut()
             .then(() => { })

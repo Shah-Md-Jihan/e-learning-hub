@@ -49,7 +49,7 @@ const Login = () => {
                             <span><FaGithub></FaGithub></span>
                         </Button>
                     </p>
-                    <p>Need an account? Please <Link>Sign Up</Link></p>
+                    <p>Need an account? Please <Link to="/register">Sign Up</Link></p>
                 </Card.Body>
             </Card>
 
