@@ -10,17 +10,7 @@ import { useEffect } from 'react';
 
 const CourseClass = () => {
     const sub_menus = useLoaderData();
-    let cat_id;
-    sub_menus.map(e => cat_id = e.category_id);
 
-    const [categories, setCat] = useState([]);
-    useEffect(() => {
-        fetch('https://e-learning-hub-bd-server.vercel.app/categories')
-            .then(res => res.json())
-            .then(data => setCat(data))
-    }, []);
-
-    const select_cat = categories.find(cat => cat._id === cat_id);
 
     return (
         <div className='my-5 mx-2'>
@@ -32,8 +22,8 @@ const CourseClass = () => {
                             <Card>
                                 <ListGroup>
                                     {
-                                        sub_menus.map(sub_menu =>
-                                            <ListGroup.Item key={sub_menu._id}>{sub_menu.sub_title}
+                                        sub_menus?.map(sub_menu =>
+                                            <ListGroup.Item key={sub_menu?._id}>{sub_menu?.sub_title}
                                             </ListGroup.Item>
                                         )
                                     }
