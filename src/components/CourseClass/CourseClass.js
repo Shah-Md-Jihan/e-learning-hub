@@ -15,7 +15,7 @@ const CourseClass = () => {
 
     const [categories, setCat] = useState([]);
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/categories')
+        fetch('https://e-learning-hub-bd-server.vercel.app/categories')
             .then(res => res.json())
             .then(data => setCat(data))
     }, []);
