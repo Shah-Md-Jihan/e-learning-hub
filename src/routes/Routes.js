@@ -5,8 +5,10 @@ import CourseClass from "../components/CourseClass/CourseClass";
 import Faq from "../components/Faq/Faq";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
+import NotFoundPage from "../components/Others/NotFoundPage";
 import TermsConditions from "../components/Others/TermsConditions";
 import Register from "../components/Register/Register";
+import TutorialDetail from "../components/TutorialDetail/TutorialDetail";
 import Main from "../layouts/Main";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 
@@ -47,9 +49,16 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/categories/:id',
-                element: <PrivateRoutes><CourseClass></CourseClass></PrivateRoutes>,
+                element: <PrivateRoutes>
+                    <CourseClass></CourseClass>
+                </PrivateRoutes>,
                 loader: ({ params }) => fetch(`https://e-learning-hub-bd-server.vercel.app/categories/${params.id}`)
-            }
+            },
+
         ]
+    },
+    {
+        path: '*',
+        element: <NotFoundPage></NotFoundPage>
     }
 ]);

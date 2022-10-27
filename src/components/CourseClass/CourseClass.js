@@ -2,10 +2,8 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { useLoaderData } from 'react-router-dom';
+import { Link, Outlet, useLoaderData } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 
 const CourseClass = () => {
@@ -23,7 +21,8 @@ const CourseClass = () => {
                                 <ListGroup>
                                     {
                                         sub_menus?.map(sub_menu =>
-                                            <ListGroup.Item key={sub_menu?._id}>{sub_menu?.sub_title}
+                                            <ListGroup.Item key={sub_menu?._id}>
+                                                <Link to={`/categories/submenu/${sub_menu?._id}`}>{sub_menu?.sub_title}</Link>
                                             </ListGroup.Item>
                                         )
                                     }
@@ -34,9 +33,8 @@ const CourseClass = () => {
                 </Col>
                 <Col lg={9}>
                     <Card>
-                        <Card.Img variant="top" src="holder.js/100px160" />
                         <Card.Body>
-                            <Card.Title>Card title</Card.Title>
+                            <Card.Title>Detail Tutorials</Card.Title>
                             <Card.Text>
                                 This is a longer card with supporting text below as a natural
                                 lead-in to additional content. This content is a little bit
@@ -46,6 +44,7 @@ const CourseClass = () => {
                     </Card>
                 </Col>
             </Row>
+            <Outlet></Outlet>
         </div>
     );
 };
