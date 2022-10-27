@@ -23,7 +23,7 @@ export const routes = createBrowserRouter([
             {
                 path: '/categories',
                 element: <Categories></Categories>,
-                loader: () => fetch('http://127.0.0.1:5000/categories')
+                loader: () => fetch('https://e-learning-hub-bd-server.vercel.app/categories')
             },
             {
                 path: '/faq',
@@ -48,7 +48,7 @@ export const routes = createBrowserRouter([
             {
                 path: '/categories/:id',
                 element: <PrivateRoutes><CourseClass></CourseClass></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://127.0.0.1:5000/categories/${params.id}`)
+                loader: ({ params }) => fetch(`https://e-learning-hub-bd-server.vercel.app/${params.id}`)
             }
         ]
     }
