@@ -13,8 +13,6 @@ import Form from 'react-bootstrap/Form';
 const Header = () => {
     const { user, providerLogOut } = useContext(AuthContex);
 
-    console.log(user?.displayName);
-
     const handleLogOut = () => {
         providerLogOut()
             .then(() => { })

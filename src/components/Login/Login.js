@@ -6,12 +6,17 @@ import Card from 'react-bootstrap/Card';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContex } from '../../context/AuthProvider';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-    const { providerGoogleLogin, providerEmailLogin } = useContext(AuthContex);
+    const {
+        providerGoogleLogin,
+        providerGithubLogin,
+        providerEmailLogin
+    } = useContext(AuthContex);
     const [error, setError] = useState('');
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -22,9 +27,17 @@ const Login = () => {
     const handleGoogleLogin = () => {
         providerGoogleLogin(googleProvider)
             .then(result => {
-                const user = result.user;
+                const user = result?.user;
             })
             .catch(e => console.error(e));
+    }
+
+    const handleGithubLogin = () => {
+        providerGithubLogin(githubProvider)
+            .then(result => {
+                const user = result?.user;
+            })
+            .catch(error => setError(error))
     }
 
     const handleEmailLogin = (e) => {
@@ -72,7 +85,7 @@ const Login = () => {
                         <Button onClick={handleGoogleLogin} variant='outline-dark' size="lg" className='me-3'>
                             <span><FaGoogle></FaGoogle></span>
                         </Button>
-                        <Button variant='outline-dark' size="lg" className='me-3'>
+                        <Button onClick={handleGithubLogin} variant='outline-dark' size="lg" className='me-3'>
                             <span><FaGithub></FaGithub></span>
                         </Button>
                     </p>
