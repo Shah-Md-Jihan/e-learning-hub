@@ -21,7 +21,7 @@ export const routes = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://127.0.0.1:5000/teacher')
+                loader: () => fetch('https://e-learning-hub-bd-server.vercel.app/teacher')
             },
             {
                 path: '/categories',
