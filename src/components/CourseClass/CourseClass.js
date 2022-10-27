@@ -22,7 +22,10 @@ const CourseClass = () => {
                                     {
                                         sub_menus?.map(sub_menu =>
                                             <ListGroup.Item key={sub_menu?._id}>
-                                                <Link to={`/categories/submenu/${sub_menu?._id}`}>{sub_menu?.sub_title}</Link>
+                                                <Link to='/'
+                                                    className='text-decoration-none text-dark'>
+                                                    {sub_menu?.sub_title}
+                                                </Link>
                                             </ListGroup.Item>
                                         )
                                     }

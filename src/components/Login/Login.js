@@ -28,14 +28,18 @@ const Login = () => {
         providerGoogleLogin(googleProvider)
             .then(result => {
                 const user = result?.user;
+                navigate(from, { replace: true });
+                setError('');
             })
-            .catch(e => console.error(e));
+            .catch(e => setError(e));
     }
 
     const handleGithubLogin = () => {
         providerGithubLogin(githubProvider)
             .then(result => {
                 const user = result?.user;
+                navigate(from, { replace: true });
+                setError('');
             })
             .catch(error => setError(error))
     }

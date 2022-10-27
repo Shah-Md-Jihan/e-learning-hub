@@ -8,7 +8,6 @@ import Login from "../components/Login/Login";
 import NotFoundPage from "../components/Others/NotFoundPage";
 import TermsConditions from "../components/Others/TermsConditions";
 import Register from "../components/Register/Register";
-import TutorialDetail from "../components/TutorialDetail/TutorialDetail";
 import Main from "../layouts/Main";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 
