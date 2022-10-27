@@ -8,6 +8,12 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 const CourseClass = () => {
     const sub_menus = useLoaderData();
+    const showDetail = (heading, detail_data) => {
+        const title = document.getElementById('title');
+        const detail = document.getElementById('detail');
+        title.innerText = heading;
+        detail.innerText = detail_data;
+    }
 
 
     return (
@@ -22,7 +28,7 @@ const CourseClass = () => {
                                     {
                                         sub_menus?.map(sub_menu =>
                                             <ListGroup.Item key={sub_menu?._id}>
-                                                <Link to='/'
+                                                <Link onClick={() => showDetail(sub_menu?.sub_title, sub_menu?.details)}
                                                     className='text-decoration-none text-dark'>
                                                     {sub_menu?.sub_title}
                                                 </Link>
@@ -37,12 +43,9 @@ const CourseClass = () => {
                 <Col lg={9}>
                     <Card>
                         <Card.Body>
-                            <Card.Title>Detail Tutorials</Card.Title>
-                            <Card.Text>
-                                This is a longer card with supporting text below as a natural
-                                lead-in to additional content. This content is a little bit
-                                longer.
-                            </Card.Text>
+                            <h1 className='text-center pb-5 text-info'>Tutorial Board</h1>
+                            <h3 id='title'></h3>
+                            <p id='detail'></p>
                         </Card.Body>
                     </Card>
                 </Col>

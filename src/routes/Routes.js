@@ -8,6 +8,7 @@ import Login from "../components/Login/Login";
 import NotFoundPage from "../components/Others/NotFoundPage";
 import TermsConditions from "../components/Others/TermsConditions";
 import Register from "../components/Register/Register";
+import SubDetail from "../components/SubDetail/SubDetail";
 import Main from "../layouts/Main";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 
@@ -19,7 +20,8 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: () => fetch('http://127.0.0.1:5000/teacher')
             },
             {
                 path: '/categories',
@@ -52,7 +54,7 @@ export const routes = createBrowserRouter([
                     <CourseClass></CourseClass>
                 </PrivateRoutes>,
                 loader: ({ params }) => fetch(`https://e-learning-hub-bd-server.vercel.app/categories/${params.id}`)
-            },
+            }
 
         ]
     },
